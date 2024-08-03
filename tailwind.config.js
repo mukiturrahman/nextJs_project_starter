@@ -1,21 +1,35 @@
 /** @type {import('tailwindcss').Config} */
-
-const { fontFamily } = require("tailwindcss/defaultTheme");
-
 module.exports = {
-    content: [
-        "./app/**/*.{js,ts,jsx,tsx,mdx}",
-        "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-        "./components/**/*.{js,ts,jsx,tsx,mdx}",
-
-        // Or if using `src` directory:
-        "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    ],
+    darkMode: ["class"],
+    content: ["./pages/**/*.{js,jsx}", "./components/**/*.{js,jsx}", "./app/**/*.{js,jsx}", "./src/**/*.{js,jsx}"],
+    prefix: "",
     theme: {
-        fontFamily: {
-            primary: "var(--font-sans)",
+        container: {
+            center: true,
+            padding: "15px",
         },
-        extend: {},
+        screens: {
+            sm: "640px",
+            md: "768px",
+            lg: "940px",
+            xl: "1200px",
+        },
+        extend: {
+            keyframes: {
+                "accordion-down": {
+                    from: { height: "0" },
+                    to: { height: "var(--radix-accordion-content-height)" },
+                },
+                "accordion-up": {
+                    from: { height: "var(--radix-accordion-content-height)" },
+                    to: { height: "0" },
+                },
+            },
+            animation: {
+                "accordion-down": "accordion-down 0.2s ease-out",
+                "accordion-up": "accordion-up 0.2s ease-out",
+            },
+        },
     },
-    plugins: [],
+    plugins: [require("tailwindcss-animate")],
 };
